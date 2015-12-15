@@ -22,7 +22,18 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Create connection
+
+```ruby
+conn = Daru::TD.connect(ENV['TD_API_KEY'])
+```
+
+### Obtain a list of databases and tables as a data frame
+
+```ruby
+df_databases = conn.databases
+df_tables = conn.tables('db_name')
+```
 
 ## Development
 
