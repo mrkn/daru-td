@@ -1,5 +1,5 @@
 module Daru
-  module Td
+  module TD
     VERSION = "0.1.0"
   end
 end

@@ -5,7 +5,7 @@ require 'daru/td/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "daru-td"
-  spec.version       = Daru::Td::VERSION
+  spec.version       = Daru::TD::VERSION
   spec.authors       = ["Kenta Murata"]
   spec.email         = ["mrkn@mrkn.jp"]
 
