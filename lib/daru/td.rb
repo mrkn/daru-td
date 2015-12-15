@@ -1,7 +1,10 @@
-require "daru/td/version"
+require 'daru/td/connection'
+require 'daru/td/version'
 
 module Daru
   module TD
-    # Your code goes here...
+    def self.connect(apikey=nil, endpoint=nil, **kwargs)
+      Connection.new(apikey, endpoint, **kwargs)
+    end
   end
 end
