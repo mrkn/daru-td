@@ -37,6 +37,12 @@ module Daru
         @client.apikey
       end
 
+      # See https://github.com/treasure-data/td-client-ruby/blob/master/lib/td/client/api.rb#L67
+      # @return [String] TreasureData endpoint URL
+      def endpoint
+        @kwargs[:endpoint] || ENV['TD_API_SERVER'] || ::TD::API::DEFAULT_ENDPOINT
+      end
+
       def databases
         if (databases = self.client.databases())
           fields = [:name, :count, :permission, :created_at, :updated_at]
@@ -59,9 +65,6 @@ module Daru
         end
       end
 
-      def query_engine(database, **kwargs)
-      end
-
       private
 
       def get_client(apikey, **kwargs)
@@ -69,14 +72,6 @@ module Daru
       end
 
       def make_dataframe(enum, fields)
-        vectors = Hash[
-          *fields.map {|name|
-            [
-              name,
-              Daru::Vector.new([]).tap {|v| v.rename name }
-            ]
-          }.flatten
-        ]
         Daru::DataFrame.new([], order: fields).tap do |df|
           enum.each do |item|
             df.add_row(yield(item))
