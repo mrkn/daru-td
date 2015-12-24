@@ -35,6 +35,15 @@ df_databases = conn.databases
 df_tables = conn.tables('db_name')
 ```
 
+### Read the query result
+
+```ruby
+engine = Daru::TD.create_engine('presto:sample_datasets', conn:conn)
+df_result = Daru::TD.read_td_query(<<-SQL, engine)
+  select * From nasdaq limit 3
+SQL
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
