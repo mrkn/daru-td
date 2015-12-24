@@ -90,7 +90,8 @@ module Daru
         # status check
         unless job.success?
           if job.debug && job.debug['stderr']
-            logger.error(job.debug['stderr'])
+            #logger.error(job.debug['stderr'])
+            $stderr.puts job.debug['stderr']
           end
           raise "job #{job.job_id} #{job.status}"
         end
