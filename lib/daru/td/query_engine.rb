@@ -119,7 +119,9 @@ module Daru
       def render_progress_html_erb(given_binding)
         template = <<-'END_ERB'
 <div style="border-style: dashed; border-width: 1px;">
-  <%=html_text("issued at #{job.issued_at.iso8601}") %>
+  <% if job.issued_at %>
+  <%=  html_text("issued at #{job.issued_at.iso8601}") %>
+  <% end %>
   URL: <a href="<%=job.url %>" target="_blank"><%=job.url %></a><br>
   <% if job.type == :presto %>
   <%   if job.debug && job.debug['cmdout'] %>

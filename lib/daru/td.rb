@@ -69,6 +69,13 @@ module Daru
       result.to_dataframe(parse_dates: parse_dates)
     end
 
+    def self.read_td_job(job_id, engine, **kwargs)
+      parse_dates = kwargs.delete(:parse_dates)
+      job = QueryEngine::JobWrapper.new(engine.connection.client.job(job_id))
+      result = engine.get_result(job, wait: true)
+      result.to_dataframe(parse_dates: parse_dates)
+    end
+
     def self.parse_query(query_string)
       CGI.parse(query_string).tap do |hash|
         hash.keys.each do |key|
