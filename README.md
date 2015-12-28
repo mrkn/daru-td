@@ -39,9 +39,16 @@ df_tables = conn.tables('db_name')
 
 ```ruby
 engine = Daru::TD.create_engine('presto:sample_datasets', conn:conn)
-df_result = Daru::TD.read_td_query(<<-SQL, engine)
+df_query_result = Daru::TD.read_td_query(<<-SQL, engine)
   select * From nasdaq limit 3
 SQL
+```
+
+### Read the result of the existing job
+
+```ruby
+job_id = 12345678
+df_job_result = Daru::TD.read_td_job(job_id, engine)
 ```
 
 ## Development
