@@ -107,13 +107,13 @@ module Daru
           return if Time.now.getutc < job.issued_at + show_progress
         end
 
-        IRuby::Display.clear_output(true)
+        ::IRuby::Display.clear_output(true)
         html = render_progress_html_erb(binding)
-        IRuby.display(IRuby.html(html))
+        ::IRuby.display(::IRuby.html(html))
       end
 
       def iruby_notebook?
-        defined?(IRuby) && !$stdout.tty?
+        defined?(::IRuby) && !$stdout.tty?
       end
 
       def render_progress_html_erb(given_binding)
