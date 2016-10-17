@@ -45,17 +45,20 @@ module Daru
 
       def to_dataframe(parse_dates: nil)
         fields = description.map {|c| c[0].to_sym }
-        Daru::DataFrame.new([], order: fields).tap do |df|
-          each_record do |record|
-            df.add_row(record)
-          end
-          if parse_dates
-            parse_date_fields(df, parse_dates)
-          end
-          if engine.clear_progress
-            ::IRuby::Display.clear_output()
+        ary = Array.new(fields.size){[]}
+        each_record do |record|
+          record.each_with_index do |x, i|
+            ary[i] << x
           end
         end
+        df = Daru::DataFrame.new(ary, order: fields)
+        if parse_dates
+          parse_date_fields(df, parse_dates)
+        end
+        if engine.clear_progress
+          ::IRuby::Display.clear_output()
+        end
+        df
       end
 
       private
