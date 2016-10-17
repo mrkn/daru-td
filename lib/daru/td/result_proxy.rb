@@ -53,7 +53,7 @@ module Daru
             parse_date_fields(df, parse_dates)
           end
           if engine.clear_progress
-            IRuby::Display.clear_output()
+            ::IRuby::Display.clear_output()
           end
         end
       end
